@@ -34,4 +34,4 @@ def get_forcast_data(cityName,api_key):
         return response.json()['list']
 
     else:
-        print("下載失敗")
+        raise Exception(cityName+"下載失敗") #自己定義raise 拋出自定義的錯誤訊息
