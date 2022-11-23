@@ -1,6 +1,6 @@
 #datasource 主要是下載資料和處理資料用 
 import requests
-import secrets
+
 
 tw_county_names = {"台北":"Taipei",
                    "台中":"Taichung",
@@ -25,8 +25,8 @@ tw_county_names = {"台北":"Taipei",
                    }
 
 
-def get_forcast_data(cityName):
-    url = f"https://api.openweathermap.org/data/2.5/forecast?q={cityName},tw&APPID={secrets.api_key}&lang=zh_tw&units=metric"
+def get_forcast_data(cityName,api_key):
+    url = f"https://api.openweathermap.org/data/2.5/forecast?q={cityName},tw&APPID={api_key}&lang=zh_tw&units=metric"
     response=requests.get(url=url)
 
     if response.ok:
