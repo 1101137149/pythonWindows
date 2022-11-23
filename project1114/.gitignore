@@ -1,0 +1,4 @@
+#不要追蹤某些檔案 或資料夾 
+a.txt
+private/* 
+b.txt
