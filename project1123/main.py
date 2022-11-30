@@ -17,19 +17,23 @@ class Window(tk.Tk):
         grid_row_nums = 3
         #enumerate 容器會建立一個索引 會傳回tuple型態 
         #cities_dict(index,key)  
-        #cities_dict.items() (index,cities)  cities裡又包含(key,value)  
+        #cities_dict.items() (index,cities)  cities裡又包含(key,value)  command=self.button_click,
 
         for index,cities in enumerate(cities_dict.items()):
             cname, ename = cities
-            btn=tk.Button(buttons_frame,text=f"{cname}\n{ename}",command=self.button_click,
+            btn=tk.Button(buttons_frame,text=f"{cname}\n{ename}",
             font=('arial',15),width=8,padx=20,pady=5)
             btn.grid(row=index % grid_row_nums,column=index // grid_row_nums)
-
+            btn.bind('<Button>',self.button_click)
 
 
         #實體的方法
-    def button_click(self):
-        print("User Click")
+    def button_click(self,event):
+        btn_txt=event.widget['text']
+        name_list=btn_txt.split("\n")
+        cname=name_list[0]
+        ename=name_list[1]
+        print(cname,ename)
 
 
 
