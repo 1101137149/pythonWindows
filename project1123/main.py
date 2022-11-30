@@ -52,19 +52,24 @@ class Window(tk.Tk):
 
 class DisplayFrame(ttk.LabelFrame):
     def __init__(self,parent,data=None,**kwargs): #這裡的self是定義
-        print(kwargs) #kwargs被打包成dict
+        # print(kwargs) #kwargs被打包成dict
         super().__init__(parent,**kwargs)
         self.city_data=data
-        leftFrame=tk.Frame(self,width=200,height=200,bg="#ff0000")
+        leftFrame=CustomFrame(self,width=200,height=200,bg="#ff0000")
         leftFrame.pack(side=tk.LEFT)
 
-        centerFrame=tk.Frame(self,width=200,height=200,bg="#00ff00")
+        centerFrame=CustomFrame(self,width=200,height=200,bg="#00ff00")
         centerFrame.pack(side=tk.LEFT)
 
-        rightFrame=tk.Frame(self,width=200,height=200,bg="#0000ff")
+        rightFrame=CustomFrame(self,width=200,height=200,bg="#0000ff")
         rightFrame.pack(side=tk.LEFT)
 
         # print(self.city_data)
+
+class CustomFrame(tk.Frame):
+    def __init__(self,parent,**kwargs):#這裡的self是定義
+        super().__init__(parent,**kwargs)
+
 
 
 def main():
