@@ -33,8 +33,15 @@ class Window(tk.Tk):
         name_list=btn_txt.split("\n")
         cname=name_list[0]
         ename=name_list[1]
-        print(cname,ename)
 
+        try:
+            list_data=ds.get_forcast_data(ename,api_key)
+        except Exception as e:
+            print(e)
+            return
+    
+        for item in list_data:
+            print(item)
 
 
 def main():
