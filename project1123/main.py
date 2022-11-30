@@ -65,13 +65,13 @@ class DisplayFrame(ttk.LabelFrame):
         rightData=self.city_data[column_rows*2:]
 
 
-        leftFrame=CustomFrame(self,data=leftData,width=200,height=200,bg="#ff0000")
+        leftFrame=CustomFrame(self,data=leftData)
         leftFrame.pack(side=tk.LEFT)
 
-        centerFrame=CustomFrame(self,data=centerData,width=200,height=200,bg="#00ff00")
+        centerFrame=CustomFrame(self,data=centerData)
         centerFrame.pack(side=tk.LEFT)
 
-        rightFrame=CustomFrame(self,data=rightData,width=200,height=200,bg="#0000ff")
+        rightFrame=CustomFrame(self,data=rightData)
         rightFrame.pack(side=tk.LEFT)
 
         # print(self.city_data)
@@ -79,10 +79,16 @@ class DisplayFrame(ttk.LabelFrame):
 class CustomFrame(tk.Frame):
     def __init__(self,parent,data=None,**kwargs):#這裡的self是定義
         super().__init__(parent,**kwargs)
-        self.list_data=data
-        self.tree=ttk.Treeview(self,columns=['#1','#2','#3','#4'])
-        self.tree.pack(side=tk.LEFT)
 
+
+        self.list_data=data
+        self.tree=ttk.Treeview(self,columns=['#1','#2','#3','#4'],show='headings',height=13)
+        self.tree.pack(side=tk.LEFT,padx=10)
+
+        scrollbar=tk.Scrollbar(self)
+        scrollbar.pack(side=tk.LEFT,fill=tk.Y)
+        self.tree.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.tree.yview)
 
         self.tree.heading('#1',text="時間")
         self.tree.heading('#2',text="溫度")
