@@ -12,10 +12,26 @@ class Window(tk.Tk):
         buttons_frame=tk.Frame(self) #,background="#333333",width=200,height=300
         buttons_frame.pack(padx=50,pady=(0,30))
 
-        for index,key in enumerate(cities_dict):
-            print(index,key)
-            tk.Button(buttons_frame,text=key,font=('Arial',15),padx=20,pady=5).grid(row=index//7,column=index%7)
-        
+
+        #設定grid的row數量
+        grid_row_nums = 3
+        #enumerate 容器會建立一個索引 會傳回tuple型態 
+        #cities_dict(index,key)  
+        #cities_dict.items() (index,cities)  cities裡又包含(key,value)  
+
+        for index,cities in enumerate(cities_dict.items()):
+            cname, ename = cities
+            btn=tk.Button(buttons_frame,text=f"{cname}\n{ename}",command=self.button_click,
+            font=('arial',15),width=8,padx=20,pady=5)
+            btn.grid(row=index % grid_row_nums,column=index // grid_row_nums)
+
+
+
+        #實體的方法
+    def button_click(self):
+        print("User Click")
+
+
 
 def main():
     window=Window(ds.tw_county_names)
