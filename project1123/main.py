@@ -1,6 +1,7 @@
 import datasource as ds
 from secrets import api_key
 import tkinter as tk
+from tkinter import ttk
 
 class Window(tk.Tk):
     def __init__(self,cities_dict):
@@ -25,6 +26,10 @@ class Window(tk.Tk):
             font=('arial',15),width=8,padx=20,pady=5)
             btn.grid(row=index % grid_row_nums,column=index // grid_row_nums)
             btn.bind('<Button>',self.button_click)
+        
+        #LabelFrame
+        displayFrame = ttk.LabelFrame(self,text="台北",width=500,height=400,borderwidth=2,relief=tk.GROOVE)
+        displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
 
 
         #實體的方法
@@ -33,14 +38,10 @@ class Window(tk.Tk):
         name_list=btn_txt.split("\n")
         cname=name_list[0]
         ename=name_list[1]
-
-        try:
-            list_data=ds.get_forcast_data(ename,api_key)
-        except Exception as e:
-            print(e)
-            return
+        city_forcase=ds.get_forcast_data(ename,api_key)
+        print(cname)
     
-        for item in list_data:
+        for item in city_forcase:
             print(item)
 
 
