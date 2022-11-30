@@ -28,10 +28,16 @@ tw_county_names = {"台北":"Taipei",
 def get_forcast_data(cityName,api_key):
     url = f"https://api.openweathermap.org/data/2.5/forecast?q={cityName},tw&APPID={api_key}&lang=zh_tw&units=metric"
     response=requests.get(url=url)
+    county_forcase=[]  #list
 
     if response.ok:
-        print("下載成功")
-        return response.json()['list']
+        print(cityName+"下載成功")
+        source_data= response.json()['list']
+        for item in source_data:
+            #建立list資料丟到county_forcase裡
+            county_forcase.append([item["dt_txt"],item["main"]["temp"],item["weather"][0]["description"],item["main"]["humidity"]]) 
+
+        return(county_forcase)
 
     else:
         raise Exception(cityName+"下載失敗") #自己定義raise 拋出自定義的錯誤訊息
