@@ -37,12 +37,15 @@ class Window(tk.Tk):
         name_list=btn_txt.split("\n")
         cname=name_list[0]
         ename=name_list[1]
-        city_forcase=ds.get_forcast_data(ename,api_key)
+        try:
+            city_forcase=ds.get_forcast_data(ename,api_key)
         # print(cname)
     
         # for item in city_forcase:
         #     print(item)
-
+        except Exception as e:
+            #出現錯誤訊息 要補上錯誤對話框
+            return
         #LabelFrame
         if hasattr(self,"displayFrame") :
             self.displayFrame.destroy()
