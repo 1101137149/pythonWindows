@@ -27,13 +27,12 @@ class Window(tk.Tk):
             btn.grid(row=index % grid_row_nums,column=index // grid_row_nums)
             btn.bind('<Button>',self.button_click)
         
-        #LabelFrame
-        displayFrame = ttk.LabelFrame(self,text="台北",width=500,height=400,borderwidth=2,relief=tk.GROOVE)
-        displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
+        
 
 
         #實體的方法
     def button_click(self,event):
+
         btn_txt=event.widget['text']
         name_list=btn_txt.split("\n")
         cname=name_list[0]
@@ -43,6 +42,12 @@ class Window(tk.Tk):
     
         for item in city_forcase:
             print(item)
+
+        #LabelFrame
+        if hasattr(self,"displayFrame") :
+            self.displayFrame.destroy()
+        self.displayFrame = ttk.LabelFrame(self,text=cname,width=500,height=400,borderwidth=2,relief=tk.GROOVE)
+        self.displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
 
 
 def main():
