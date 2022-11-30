@@ -46,9 +46,12 @@ class Window(tk.Tk):
         #LabelFrame
         if hasattr(self,"displayFrame") :
             self.displayFrame.destroy()
-        self.displayFrame = ttk.LabelFrame(self,text=cname,width=500,height=400,borderwidth=2,relief=tk.GROOVE)
+        self.displayFrame = DisplayFrame(self,text=cname,width=500,height=400,borderwidth=2,relief=tk.GROOVE)
         self.displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
 
+
+class DisplayFrame(ttk.LabelFrame):
+    pass
 
 def main():
     window=Window(ds.tw_county_names)
