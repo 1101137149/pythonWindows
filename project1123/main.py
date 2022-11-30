@@ -38,20 +38,26 @@ class Window(tk.Tk):
         cname=name_list[0]
         ename=name_list[1]
         city_forcase=ds.get_forcast_data(ename,api_key)
-        print(cname)
+        # print(cname)
     
-        for item in city_forcase:
-            print(item)
+        # for item in city_forcase:
+        #     print(item)
 
         #LabelFrame
         if hasattr(self,"displayFrame") :
             self.displayFrame.destroy()
-        self.displayFrame = DisplayFrame(self,text=cname,width=500,height=400,borderwidth=2,relief=tk.GROOVE)
+        self.displayFrame = DisplayFrame(self,data=city_forcase,text=cname,width=500,height=400,borderwidth=2,relief=tk.GROOVE)
         self.displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
 
 
 class DisplayFrame(ttk.LabelFrame):
-    pass
+    def __init__(self,parent,data=None,**kwargs): #這裡的self是定義
+        print(kwargs) #kwargs被打包成dict
+        super().__init__(parent,**kwargs)
+        self.city_data=data
+
+        print(self.city_data)
+
 
 def main():
     window=Window(ds.tw_county_names)
