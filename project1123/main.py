@@ -11,7 +11,7 @@ class Window(tk.Tk):
 
         #建立存放按鈕的容器
         buttons_frame=tk.Frame(self) #,background="#333333",width=200,height=300
-        buttons_frame.pack(padx=50,pady=(0,30))
+        buttons_frame.pack(padx=115,pady=(0,30))
 
 
         #設定grid的row數量
@@ -37,7 +37,7 @@ class Window(tk.Tk):
         name_list=btn_txt.split("\n")
         cname=name_list[0]
         ename=name_list[1]
-
+        
         #判斷是否是except
         errorLabel=False
         try:
@@ -46,7 +46,6 @@ class Window(tk.Tk):
             print(e)
             city_forcase=None
             errorLabel=True
-
         finally:
             #LabelFrame
             if hasattr(self,"displayFrame") :
@@ -57,12 +56,10 @@ class Window(tk.Tk):
             #出現錯誤訊息 要補上錯誤對話框
             if  errorLabel:
                 tk.Label(self.displayFrame, text="無資料!").pack(pady=10)
-                messagebox.showerror("Error",f"{cname}沒有天氣資料")
+                messagebox.showwarning("Error",f"{cname}沒有天氣資料")
+                self.config(relief=tk.RAISED)
 
-        
 
-
-        
 
 class DisplayFrame(ttk.LabelFrame):
     def __init__(self,parent,data=None,**kwargs): #這裡的self是定義
