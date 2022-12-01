@@ -1,7 +1,7 @@
 import datasource as ds
 from secrets import api_key
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk,messagebox
 
 class Window(tk.Tk):
     def __init__(self,cities_dict):
@@ -30,33 +30,47 @@ class Window(tk.Tk):
         
 
 
-        #實體的方法
+        #實體的方法 當按鈕按下去
     def button_click(self,event):
-
+        #抓城市中文名、英文名
         btn_txt=event.widget['text']
         name_list=btn_txt.split("\n")
         cname=name_list[0]
         ename=name_list[1]
+
+        #判斷是否是except
+        errorLabel=False
         try:
             city_forcase=ds.get_forcast_data(ename,api_key)
-        # print(cname)
-    
-        # for item in city_forcase:
-        #     print(item)
         except Exception as e:
-            #出現錯誤訊息 要補上錯誤對話框
-            return
-        #LabelFrame
-        if hasattr(self,"displayFrame") :
-            self.displayFrame.destroy()
-        self.displayFrame = DisplayFrame(self,data=city_forcase,text=cname,borderwidth=2,relief=tk.GROOVE)
-        self.displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
+            print(e)
+            city_forcase=None
+            errorLabel=True
 
+        finally:
+            #LabelFrame
+            if hasattr(self,"displayFrame") :
+                self.displayFrame.destroy()
+            self.displayFrame = DisplayFrame(self,data=city_forcase,text=cname,borderwidth=2,relief=tk.GROOVE)
+            self.displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
+
+            #出現錯誤訊息 要補上錯誤對話框
+            if  errorLabel:
+                tk.Label(self.displayFrame, text="無資料!").pack(pady=10)
+                messagebox.showerror("Error",f"{cname}沒有天氣資料")
+
+        
+
+
+        
 
 class DisplayFrame(ttk.LabelFrame):
     def __init__(self,parent,data=None,**kwargs): #這裡的self是定義
         # print(kwargs) #kwargs被打包成dict
         super().__init__(parent,**kwargs)
+        if data==None:
+            return
+
         self.city_data=data
 
         #資料拆成3份
