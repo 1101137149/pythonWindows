@@ -53,12 +53,12 @@ class Window(tk.Tk):
             self.displayFrame = DisplayFrame(self,data=city_forcase,text=cname,borderwidth=2,relief=tk.GROOVE)
             self.displayFrame.pack(fill=tk.BOTH,padx=50,pady=(0,30))
 
+
+
             #出現錯誤訊息 要補上錯誤對話框
             if  errorLabel:
                 tk.Label(self.displayFrame, text="無資料!").pack(pady=10)
-                messagebox.showwarning("Error",f"{cname}沒有天氣資料")
-                self.config(relief=tk.RAISED)
-
+                messagebox.showwarning("無資料",f"{cname}沒有天氣資料")
 
 
 class DisplayFrame(ttk.LabelFrame):
@@ -88,7 +88,9 @@ class DisplayFrame(ttk.LabelFrame):
         rightFrame=CustomFrame(self,data=rightData)
         rightFrame.pack(side=tk.LEFT)
 
-        # print(self.city_data)
+
+
+
 
 class CustomFrame(tk.Frame):
     def __init__(self,parent,data=None,**kwargs):#這裡的self是定義
