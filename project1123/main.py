@@ -67,7 +67,7 @@ class DisplayFrame(ttk.LabelFrame):
         super().__init__(parent,**kwargs)
         if data==None:
             return
-
+        print(data)
         self.city_data=data
 
         #資料拆成3份
